@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ project.name }} {% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row" style="margin-top:20px;">
+        <div class="col-md-4"></div>
+        <div class="col-md-8">
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">{{ project.name }}</h5>
+                <h6>Proje Sahibi: {{ course.project_owner.get_full_name }}</h6>
+                <p class="card-text">{{ project.content|safe|linebreaks }}</p>
+                {% if request.user.is_authenticated %}
+                  <a href="{{ project.get_update_url }}" class="btn btn-outline-dark">Güncelle</a>
+                  <a href="{{ project.get_delete_url }}" class="btn btn-danger">Sil</a>
+                {% endif %}
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

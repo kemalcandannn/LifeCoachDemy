@@ -16,13 +16,13 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Course',
+            name='Project',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=120, verbose_name='Dersin Adı')),
+                ('name', models.CharField(max_length=120, verbose_name='Projenin Adı')),
                 ('content', ckeditor.fields.RichTextField(blank=True, null=True, verbose_name='İçerik')),
                 ('slug', models.SlugField(editable=False, max_length=130, unique=True)),
-                ('staff', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='courses', to=settings.AUTH_USER_MODEL, verbose_name='Dersi Veren Kişi')),
+                ('project_owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='projects', to=settings.AUTH_USER_MODEL, verbose_name='Proje Sahibi')),
             ],
         ),
     ]

@@ -41,6 +41,8 @@ INSTALLED_APPS = [
 
     # Kullanici Uygulamaları
     'course',
+    'project',
+
     # 3. Parti Uygulamaları
     'crispy_forms',
     'django_cleanup',
