@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %} Dersler {% endblock %}
+
+{% block body %}
+    {% for course in courses %}
+        <a href="{{ course.get_absolute_url }}"> {{ course.name }} </a><br>
+    {% endfor %}
+
+{% endblock %}
