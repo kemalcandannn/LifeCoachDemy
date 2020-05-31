@@ -2,8 +2,10 @@ from django.shortcuts import render, HttpResponse, get_object_or_404, HttpRespon
 from .models import Course
 from .forms import CourseForm
 from django.contrib import messages
+from django.utils.text import slugify
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+
 # Create your views here.
 
 def course_index(request):
@@ -31,8 +33,8 @@ def course_index(request):
 
     return render(request, 'course/index.html', {'courses': courses})
 
-def course_detail(request, id):
-    course = get_object_or_404(Course, id=id)
+def course_detail(request, slug):
+    course = get_object_or_404(Course, slug=slug)
     context = {
         'course' : course
     }
@@ -49,7 +51,7 @@ def course_create(request):
         course.staff = request.user
         course.save()
 
-        messages.success(request, 'Başarılı bir şekilde oluşturuldu.')
+        messages.success(request, '"' + course.name + '" dersi başarılı bir şekilde oluşturuldu.')
         return HttpResponseRedirect(course.get_absolute_url())
 
     context = {
@@ -57,15 +59,15 @@ def course_create(request):
     }
     return render(request, 'course/form.html', context)
 
-def course_update(request, id):
+def course_update(request, slug):
     if not request.user.is_authenticated:
         return Http404()
 
-    course = get_object_or_404(Course, id=id)
+    course = get_object_or_404(Course, slug=slug)
     form = CourseForm(request.POST or None, instance=course)
     if form.is_valid():
         form.save()
-        messages.success(request, 'Başarılı bir şekilde güncellendi.')
+        messages.success(request, '"' + course.name + '" dersi başarılı bir şekilde güncellendi.')
         return HttpResponseRedirect(course.get_absolute_url())
 
     context = {
@@ -74,11 +76,11 @@ def course_update(request, id):
 
     return render(request, 'course/form.html', context)
 
-def course_delete(request, id):
+def course_delete(request, slug):
     if not request.user.is_authenticated:
         return Http404()
 
-    course = get_object_or_404(Course, id=id)
+    course = get_object_or_404(Course, slug=slug)
     course.delete()
-    messages.error(request, 'Başarılı bir şekilde silindi.')
+    messages.error(request, '"' + course.name + '" dersi başarılı bir şekilde silindi.')
     return redirect('course:index')

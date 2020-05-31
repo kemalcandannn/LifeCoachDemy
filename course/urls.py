@@ -5,8 +5,9 @@ app_name = 'course'
 
 urlpatterns = [
     url(r'^index/$', course_index, name='index'),
-    url(r'^(?P<id>\d+)/$', course_detail, name='detail'),
     url(r'^create/$', course_create, name='create'),
-    url(r'^(?P<id>\d+)/update/$', course_update, name='update'),
-    url(r'^(?P<id>\d+)/delete/$', course_delete, name='delete'),
+
+    url(r'^(?P<slug>[\w-]+)/$', course_detail, name='detail'),
+    url(r'^(?P<slug>[\w-]+)/update/$', course_update, name='update'),
+    url(r'^(?P<slug>[\w-]+)/delete/$', course_delete, name='delete'),
 ]
