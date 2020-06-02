@@ -3,21 +3,40 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <a class="navbar-brand" href="{% url  'course:index' %}">LIFECOACHDEMY</a>
+    <a class="navbar-brand" href="/home">LIFECOACHDEMY</a>
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href="{% url  'course:index' %}">Anasayfa <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/home">Anasayfa <span class="sr-only">(current)</span></a>
       </li>
+      {% if request.user.is_authenticated %}
       <li class="nav-item">
         <a class="nav-link" href="{% url  'course:create' %}">Ders Ekle</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{% url  'project:create' %}">Proje Ekle</a>
       </li>
+      {% endif %}
+
+      <li class="nav-item active">
+        <a class="nav-link" href="/aboutUs">Hakkımızda</a>
+      </li>
+
+      {% if not request.user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url  'accounts:login' %}">Giriş Yap/Üye Ol</a>
+      </li>
+      {% endif %}
+
+      {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url  'accounts:logout' %}">Çıkış Yap</a>
+        </li>
+      {% endif %}
+
     </ul>
 
     <form class="form-inline my-2 my-lg-0" method="get">
-      <input class="form-control mr-sm-2" type="text" placeholder="Ara" aria-label="Ara" name="q" value="{{ request.GET.q }}">
+      <input id="input_search_bar" class="form-control mr-sm-2" type="text" style="background-color: white;text-align: left;" placeholder="Ara" aria-label="Ara" name="q" value="{{ request.GET.q }}">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Ara</button>
     </form>
 

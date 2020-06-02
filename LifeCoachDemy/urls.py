@@ -19,12 +19,19 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 from home.views import home_view
+from aboutus.views import aboutUs_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', home_view),
+    url(r'^home$', home_view),
+    url(r'^index$', home_view),
+    url(r'^index$', home_view),
+    url(r'^aboutUs/$', aboutUs_view),
     url(r'^course/', include('course.urls')),
     url(r'^project/', include('project.urls')),
+
+    url(r'^accounts/', include('accounts.urls')),
 
 ]
 

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+{% block extrastyles %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block title %} Login {% endblock %}
+
+{% block body %}
+<div class="wrapper fadeInDown zero-raduis">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <!-- <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" /> -->
+            <h2 class="my-5">Kayıt Ol</h2>
+        </div>
+
+        <!-- Login Form -->
+        <form method="post">
+            {% csrf_token %}
+            <h1>LifeCoachDemy</h1>
+            {{ form|crispy }}
+
+            <input class="btn btn-primary" type="submit" value="Kayıt Ol">
+        </form>
+    </div>
+</div>
+
+{% endblock %}
