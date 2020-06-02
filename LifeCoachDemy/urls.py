@@ -19,7 +19,9 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 from home.views import home_view
-from aboutus.views import aboutUs_view
+from about.views import about_view
+from contact.views import contact_view
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,10 +29,10 @@ urlpatterns = [
     url(r'^home$', home_view),
     url(r'^index$', home_view),
     url(r'^index$', home_view),
-    url(r'^aboutUs/$', aboutUs_view),
+    url(r'^about/$', about_view),
+    url(r'^contact/$', contact_view),
     url(r'^course/', include('course.urls')),
     url(r'^project/', include('project.urls')),
-
     url(r'^accounts/', include('accounts.urls')),
 
 ]
