@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, Http404
 from .forms import LoginForm, RegisterForm
 from django.contrib.auth import authenticate, login, logout
 
@@ -31,3 +31,14 @@ def register_view(request):
 def logout_view(request):
     logout(request)
     return redirect('/index')
+
+def profile_view(request):
+    if not request.user.is_authenticated:
+        return Http404()
+
+    user = request.user
+
+    context = {
+        'user' : user
+    }
+    return render(request, 'accounts/profile_view.html', context)
