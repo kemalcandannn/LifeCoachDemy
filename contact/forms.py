@@ -11,3 +11,11 @@ class ContactForm(forms.ModelForm):
             'eMail',
             'content',
         ]
+
+class ContactUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = Contact
+        fields = [
+            'answered',
+        ]

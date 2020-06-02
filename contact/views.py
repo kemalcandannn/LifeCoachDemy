@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, get_object_or_404, HttpResponseRedirect, redirect, Http404
 from .models import Contact
-from .forms import ContactForm
+from .forms import ContactForm, ContactUpdateForm
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
@@ -38,7 +38,16 @@ def contact_index(request):
 
 def contact_detail(request, slug):
     contact = get_object_or_404(Contact, slug=slug)
+
+    form = ContactUpdateForm(request.POST or None, instance=contact)
+    if form.is_valid():
+        form.save()
+        messages.success(request, '"' + contact.name + '" başarıyla güncellendi.')
+        return redirect('contact:index')
+
+
     context = {
+        'form' : form,
         'contact' : contact
     }
     return render(request, 'contact/detail.html', context)
@@ -47,9 +56,7 @@ def contact_create(request):
     form = ContactForm(request.POST or None) # , request.FILES or None >>>> Formun içinde dosya göndermek için kullanılır
 
     if form.is_valid():
-        contact = form.save(commit=False)
-        contact.staff = request.user
-        contact.save()
+        contact = form.save()
 
         messages.success(request, '"' + contact.name + '" başarıyla iletildi.')
         return HttpResponseRedirect(contact.get_absolute_url())

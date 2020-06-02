@@ -1,29 +1,39 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %} {{ course.name }} {% endblock %}
 
 {% block body %}
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">{{ contact.name }}</h5>
-                <h6>Post Sahibi: {{ contact.full_name }}</h6>
-                <h6>E-Mail: {{ contact.eMail }}</h6>
-                <h6>Cevaplanma Durumu: {% if contact.answered %}Cevaplandı{% endif %}{% if not contact.answered %}Cevaplanmadı{% endif %}</h6>
-                <h6>Cevaplayan Kişi: {{ contact.post_answered_user }}</h6>
-                <p class="card-text">{{ contact.content|safe|linebreaks }}</p>
-                {% if request.user.is_authenticated %}
-                  <a href="{{ contact.get_update_url }}" class="btn btn-outline-dark">Güncelle</a>
-                  <a href="{{ contact.get_delete_url }}" class="btn btn-danger">Sil</a>
-                {% endif %}
-              </div>
+        <div class="container">
+            <div class="row justify-content-center mt-5" style="margin-top:20px;">
+                <div class="card">
+                    <div class="card-body" style="background-color: {% if contact.answered %}#84b67e{% endif %}{% if not contact.answered %}#b67e7e{% endif %}">
+                        <h5 class="card-title" style="text-align:center;font-weight: bold;">{{ contact.name }}</h5>
+                        <h6>Ad Soyad: {{ contact.full_name }}</h6>
+                        <h6>E-Mail: {{ contact.eMail }}</h6>
+                        {% if contact.post_answered_user %}
+                        <h6>Cevaplayan Kişi: {{ contact.post_answered_user }}</h6>
+                        {% endif %}
+                        <hr>
+                        <p class="card-text">{{ contact.content|safe|linebreaks }}</p>
+                        <hr>
+                        <form method="post" style="color: white;">
+                            {% csrf_token %}
+                            <div>
+                                <div style="float:left;"><p style="color:red;">Cevaplanma Durumu: </p></div>
+                                <div style="float:left;padding: 10px;color:{% if contact.answered %}#84b67e{% endif %}{% if not contact.answered %}#b67e7e{% endif %}">{{ form|crispy }}</div>
+
+                            </div>
+
+                            <div style="text-align:center;margin-bottom:10px;">
+                                <input class="btn btn-primary" type="submit" value="Kaydet">
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
 
 
 {% endblock %}
