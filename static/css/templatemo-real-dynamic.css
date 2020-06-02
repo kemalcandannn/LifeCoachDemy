@@ -41,7 +41,7 @@ p, address {
 
 address { max-width: 400px; }
 ul, i { color: #666; }
-ul { line-height: 2; }
+ul { line-height: 1; }
 
 .tm-container {
     max-width: 1800px;
@@ -58,8 +58,7 @@ ul { line-height: 2; }
 
 .tm-site-header-overlay {
     color: white;
-    background-color: #656667;    
-    padding-top: 20px; 
+    background-color: #656667;
 }
 
 .tm-header-stripe {
@@ -87,7 +86,6 @@ ul { line-height: 2; }
   font-size: 1.4rem;
   transform: skew(-20deg, 0);
   transition: all 0.3s ease;
-  margin-right: 20px;
 }
 
 .navbar-expand-lg .navbar-nav .nav-link {
@@ -578,9 +576,8 @@ figure.effect-bubba:hover .tm-member-social {
 
 .form-control {
   font-size: 1em;
-  border-radius: 0;
+  border-radius: 7px;
   padding: 14px 20px;
-  height: auto;
 }
 
 select.form-control { height: 60px; }

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     # Kullanici Uygulamaları
     'course',
     'project',
+    'contacts',
 
     # 3. Parti Uygulamaları
     'crispy_forms',
@@ -145,15 +146,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 CKEDITOR_JQUERY_URL = os.path.join(STATIC_URL, 'js/jquery.min.js')
 CKEDITOR_CONFIGS = {
     'default': {
-        'toolbar': 'Custom',
-        'toolbar_Custom': [
-            ['Bold', 'Italic', 'Underline'],
-            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter',
-             'JustifyRight', 'JustifyBlock'],
-            ['Link', 'Unlink'],
-            ['RemoveFormat', 'Source']
-        ],
-        # 'height': '300',
+        'toolbar': 'Full',
         'width': '100%',
     },
 }

@@ -10,7 +10,7 @@
             <div class="col-md-8">
                 <form method="post" style="color: white;"> <!--enctype="multipart/form-data" >>>> Formun içinde dosya göndermek için kullanılır  -->
                     {% csrf_token %}
-                    <h1 style="text-align: center;">Proje Ekleme Formu</h1>
+                    <h1 style="text-align: center;">İletişim Formu</h1>
                     {{ form|crispy }}
                     {{ form.media }} <!--  Bu ifade formun kullanacağı javascript gibi dosyaları çağırır       -->
                     <div style="text-align:center;margin-bottom:10px;">

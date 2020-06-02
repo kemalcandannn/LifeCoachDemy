@@ -20,7 +20,6 @@ from django.conf import settings
 
 from home.views import home_view
 from about.views import about_view
-from contact.views import contact_view
 
 
 urlpatterns = [
@@ -30,7 +29,7 @@ urlpatterns = [
     url(r'^index$', home_view),
     url(r'^index$', home_view),
     url(r'^about/$', about_view),
-    url(r'^contact/$', contact_view),
+    url(r'^contact/', include('contacts.urls')),
     url(r'^course/', include('course.urls')),
     url(r'^project/', include('project.urls')),
     url(r'^accounts/', include('accounts.urls')),
