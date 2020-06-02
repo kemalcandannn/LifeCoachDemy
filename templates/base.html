@@ -19,7 +19,7 @@
     <script src="{% static 'js/base.js' %}"></script>
     {% block extrastyles %}{% endblock %}
 </head>
-<body>
+<body style="{% block bodystyle %}{% endblock %}">
 
     {% include 'messages.html' %}
     {% include 'header.html' %}
