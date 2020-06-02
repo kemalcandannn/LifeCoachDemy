@@ -41,6 +41,9 @@ def contact_detail(request, slug):
 
     form = ContactUpdateForm(request.POST or None, instance=contact)
     if form.is_valid():
+        contract = form.save(commit=False)
+        if contact.answered:
+            contact.post_answered_user = request.user
         form.save()
         messages.success(request, '"' + contact.name + '" başarıyla güncellendi.')
         return redirect('contact:index')

@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^course/', include('course.urls')),
     url(r'^project/', include('project.urls')),
     url(r'^accounts/', include('accounts.urls')),
+    url(r'^user/', include('user.urls')),
 
 ]
 

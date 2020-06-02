@@ -43,12 +43,13 @@ INSTALLED_APPS = [
     'course',
     'project',
     'contact',
+    'user',
 
     # 3. Parti Uygulamaları
     'crispy_forms',
     'django_cleanup',
     'ckeditor',
-
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [

@@ -7,5 +7,9 @@ class ProjectForm(forms.ModelForm):
         model = Project
         fields = [
             'name',
-            'content'
+            'content',
+            'lower_price',
+            'upper_price',
+            'deadline',
+
         ]

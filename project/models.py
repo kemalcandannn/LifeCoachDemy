@@ -10,6 +10,11 @@ class Project(models.Model):
     project_owner = models.ForeignKey('auth.User', verbose_name='Proje Sahibi', related_name='projects', on_delete=models.CASCADE)
     name = models.CharField(max_length=120, verbose_name='Projenin Adı')
     content = RichTextField(verbose_name='İçerik', null=True, blank=True)
+    lower_price = models.FloatField(verbose_name='Fiyat Alt Sınırı', default=0)
+    upper_price = models.FloatField(verbose_name='Fiyat Üst Sınırı')
+    deadline = models.DateTimeField(verbose_name='Proje Teslim Tarihi')
+    done = models.BooleanField(verbose_name='Tamamlandı', default=False)
+
     slug = models.SlugField(unique=True, editable=False, max_length=130)
 
     def __str__(self):

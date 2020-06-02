@@ -13,7 +13,7 @@
                         <h6>Ad Soyad: {{ contact.full_name }}</h6>
                         <h6>E-Mail: {{ contact.eMail }}</h6>
                         {% if contact.post_answered_user %}
-                        <h6>Cevaplayan Kişi: {{ contact.post_answered_user }}</h6>
+                        <h6>Cevaplayan Kişi: {{ contact.post_answered_user.get_full_name }}</h6>
                         {% endif %}
                         <hr>
                         <p class="card-text">{{ contact.content|safe|linebreaks }}</p>
@@ -35,5 +35,11 @@
             </div>
         </div>
 
+        <script>
+            $(document).ready(function(){
+                $('#div_id_answered').find('label')[0].style = 'display:none;';
+            })
+
+        </script>
 
 {% endblock %}

@@ -7,5 +7,6 @@ class CourseForm(forms.ModelForm):
         model = Course
         fields = [
             'name',
-            'content'
+            'subject',
+            'content',
         ]

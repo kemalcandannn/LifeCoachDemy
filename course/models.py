@@ -9,7 +9,9 @@ from ckeditor.fields import RichTextField
 class Course(models.Model):
     staff = models.ForeignKey('auth.User', verbose_name='Dersi Veren Kişi', related_name='courses', on_delete=models.CASCADE)
     name = models.CharField(max_length=120, verbose_name='Dersin Adı')
+    subject = models.CharField(max_length=120, verbose_name='Dersin Konusu')
     content = RichTextField(verbose_name='İçerik', null=True, blank=True)
+    state = models.BooleanField(verbose_name='Durumu', default=False)
     slug = models.SlugField(unique=True, editable=False, max_length=130)
 
     def __str__(self):
