@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     # Kullanici Uygulamaları
     'course',
     'project',
-    'contacts',
+    'contact',
 
     # 3. Parti Uygulamaları
     'crispy_forms',

@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^index$', home_view),
     url(r'^index$', home_view),
     url(r'^about/$', about_view),
-    url(r'^contact/', include('contacts.urls')),
+    url(r'^contact/', include('contact.urls')),
     url(r'^course/', include('course.urls')),
     url(r'^project/', include('project.urls')),
     url(r'^accounts/', include('accounts.urls')),

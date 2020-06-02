@@ -7,11 +7,13 @@ from ckeditor.fields import RichTextField
 # Create your models here.
 
 class Contact(models.Model):
-    post_owner = models.ForeignKey('auth.User', verbose_name='Postun Sahibi', related_name='contacts', on_delete=models.CASCADE)
+
+    full_name = models.CharField(max_length=250, verbose_name='Ad Soyad')
     name = models.CharField(max_length=120, verbose_name='Başlık')
     eMail = models.EmailField(verbose_name='E-mail')
     content = RichTextField(verbose_name='İçerik', null=True, blank=True)
     slug = models.SlugField(unique=True, editable=False, max_length=130)
+    answered = models.BooleanField(verbose_name='Cevaplanma Durumu', default=False)
     post_answered_user = models.ForeignKey('auth.User', verbose_name='Postu Cevaplayan Kişi', on_delete=models.CASCADE, null=True, blank=True)
 
 
@@ -19,16 +21,16 @@ class Contact(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('contacts:detail', kwargs={'slug': self.slug})
+        return reverse('contact:detail', kwargs={'slug': self.slug})
 
     def get_create_url(self):
-        return reverse('contacts:create')
+        return reverse('contact:create')
 
     def get_update_url(self):
-        return reverse('contacts:update', kwargs={'slug': self.slug})
+        return reverse('contact:update', kwargs={'slug': self.slug})
 
     def get_delete_url(self):
-        return reverse('contacts:delete', kwargs={'slug': self.slug})
+        return reverse('contact:delete', kwargs={'slug': self.slug})
 
     def get_unique_slug(self):
         slug = slugify(self.name.replace('ı', 'i'))

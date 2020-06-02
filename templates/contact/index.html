@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %} İletişim Formları {% endblock %}
+
+{% block body %}
+    {% for contact in contacts %}
+        <div class="container">
+            <div class="row justify-content-center mt-5" style="margin-top:20px;">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ contact.name }}</h5>
+                        <h6>Post Sahibi: {{ contact.full_name }}</h6>
+                        <h6>E-Mail: {{ contact.eMail }}</h6>
+                        <h6>Cevaplanma Durumu: {% if contact.answered %}Cevaplandı{% endif %}{% if not contact.answered %}Cevaplanmadı{% endif %}</h6>
+                        <h6>Cevaplayan Kişi: {{ contact.post_answered_user }}</h6>
+                        <p class="card-text">{{ contact.content|safe|linebreaks }}</p>
+                        <a href="{{ contact.get_absolute_url }}" class="btn btn-primary">İncele</a>
+
+                        {% if request.user.is_authenticated %}
+                          <a href="{{ contact.get_update_url }}" class="btn btn-outline-dark">Güncelle</a>
+                          <a href="{{ contact.get_delete_url }}" class="btn btn-danger">Sil</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+    <div class="row justify-content-center mt-3">
+        <ul class="pagination">
+            <li class="page-item {% if not contacts.has_previous %}disabled{% endif %}">
+                <a class="page-link" {% if not contacts.has_previous %} href="#" {% endif %} {% if contacts.has_previous %} href="?sayfa={{ contacts.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" {% endif %} tabindex="-1" aria-disabled="true">Önceki</a>
+            </li>
+
+            {% for page in contacts.paginator.page_range %}
+            <li class="page-item {% ifequal page contacts.number %}active{% endifequal %}"><a class="page-link" href="?sayfa={{ page }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ page }}</a></li>
+            {% endfor %}
+
+            <li class="page-item {% if not contacts.has_next %}disabled{% endif %}">
+                <a class="page-link" {% if not contacts.has_next %} href="#" {% endif %} {% if contacts.has_next %} href="?sayfa={{ contacts.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" {% endif %} tabindex="-1" aria-disabled="true">Sonraki</a>
+            </li>
+        </ul>
+
+    </div>
+
+{% endblock %}
