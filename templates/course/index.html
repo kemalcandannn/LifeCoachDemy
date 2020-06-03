@@ -3,6 +3,17 @@
 {% block title %} Dersler {% endblock %}
 
 {% block body %}
+    <div class="row justify-content-center mt-3">
+        <div class="col-sm-3">
+            <form method="get" role="search" class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-lg">
+                    <input class="form-control mb-3" type="search" aria-label="Ara" aria-describedby="inputGroup-sizing-lg" name="q" value="{{ request.GET.q }}">
+                    <button class="btn btn-success my-2 my-sm-0" type="submit" style="height: 50px;">Ara</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     {% for course in courses %}
         <div class="container">
             <div class="row justify-content-center mt-5" style="margin-top:20px;">

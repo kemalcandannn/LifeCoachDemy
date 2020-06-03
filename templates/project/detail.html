@@ -6,7 +6,12 @@
 
 <div class="container">
     <div class="row" style="margin-top:20px;">
-        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            {% if project.documentation %}
+                <iframe src="{{ project.documentation.url }}" frameborder="0"></iframe>
+
+            {% endif %}
+        </div>
         <div class="col-md-8">
             <div class="card" style="width: 18rem;">
               <div class="card-body">

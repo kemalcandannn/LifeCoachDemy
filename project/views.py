@@ -44,7 +44,7 @@ def project_create(request):
     if not request.user.is_authenticated:
         return Http404()
 
-    form = ProjectForm(request.POST or None) # , request.FILES or None >>>> Formun içinde dosya göndermek için kullanılır
+    form = ProjectForm(request.POST or None, request.FILES or None) # , request.FILES or None >>>> Formun içinde dosya göndermek için kullanılır
 
     if form.is_valid():
         project = form.save(commit=False)
@@ -64,7 +64,7 @@ def project_update(request, slug):
         return Http404()
 
     project = get_object_or_404(Project, slug=slug)
-    form = ProjectForm(request.POST or None, instance=project)
+    form = ProjectForm(request.POST or None, request.FILES or None, instance=project)
     if form.is_valid():
         form.save()
         messages.success(request, '"' + project.name + '" Projesi başarılı bir şekilde güncellendi.')

@@ -39,7 +39,7 @@ def user_create(request):
     if not request.user.is_authenticated:
         return Http404()
 
-    form = UserForm(request.POST or None) # , request.FILES or None >>>> Formun içinde dosya göndermek için kullanılır
+    form = UserForm(request.POST or None, request.FILES or None) # , request.FILES or None >>>> Formun içinde dosya göndermek için kullanılır
 
     if form.is_valid():
         user = form.save(commit=False)
@@ -59,7 +59,7 @@ def user_update(request, slug):
         return Http404()
 
     user = get_object_or_404(User, slug=slug)
-    form = UserForm(request.POST or None, instance=user)
+    form = UserForm(request.POST or None, request.FILES or None, instance=user)
     if form.is_valid():
         form.save()
         messages.success(request, 'Kullanıcı başarılı bir şekilde güncellendi.')

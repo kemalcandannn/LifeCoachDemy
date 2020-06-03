@@ -13,7 +13,8 @@ class User(models.Model):
     mail = models.EmailField(verbose_name='E-Mail')
     cep_tel = PhoneNumberField(null=False, blank=False, unique=True)
     #profession = models.ForeignKey()
-    #Fotograf
+    photo = models.ImageField(verbose_name='Dökümantasyon', null=True, blank=True)
+
     #VerilenDersler
 
     experience = RichTextField(verbose_name='Tecrübe', null=True, blank=True)
