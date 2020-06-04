@@ -4,17 +4,17 @@
 {% if messages %}
     {% for message in messages %}
 
-    <div class="alert alert-{% ifequal message.tags 'error' %}danger{% endifequal %}{% ifequal message.tags 'success' %}success{% endifequal %} alert-dismissible fade show" id="alertbox" role="alert">
+    <div class="alert alert-{% ifequal message.tags 'error' %}danger{% endifequal %}{% ifequal message.tags 'success' %}success{% endifequal %} alert-dismissible fade show alerttt" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         {{ message }}
     </div>
 
     <script>
         $(document).ready(function() {
-            $("#alertbox").hide();
+            $(".alerttt").hide();
 
-            $("#alertbox").fadeTo(1500, 500).slideUp(500, function() {
-                $("#success-alert").slideUp(500);
+            $(".alerttt").fadeTo(1500, 500).slideUp(500, function() {
+                $(".alerttt").slideUp(500);
             });
         });
     </script>
