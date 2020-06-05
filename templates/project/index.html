@@ -40,7 +40,6 @@
                             <thead class="thead-light">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Proje Sahibi</th>
                                 <th scope="col">Proje Adı</th>
                                 <th scope="col">Fiyat</th>
                                 <th scope="col">Tamamlanma Tarihi</th>
@@ -52,7 +51,6 @@
                             {% for project in projects %}
                             <tr>
                                 <th scope="row">{{ forloop.counter }}</th>
-                                <td>{% if project.project_owner.get_full_name%}<a href="{{ project.get_absolute_url }}">{{ project.project_owner.get_full_name }}</a>{% endif %}{% if not project.project_owner.get_full_name%}<a href="#">{{ project.project_owner }}</a>{% endif %}</td>
                                 <td>{{ project.name }}</td>
                                 <td>{% if project.price %}{{ project.price }}{% endif %}{% if not project.price %}Belirtilmemiş{% endif %}</td>
                                 <td>{{ project.deadline }}</td>

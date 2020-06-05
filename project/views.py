@@ -9,7 +9,7 @@ from django.db.models import Q
 # Create your views here.
 
 def project_index(request):
-    project_list = Project.objects.raw('SELECT * FROM project_project')
+    project_list = Project.objects.raw('SELECT * FROM project_project WHERE project_owner_id = ' + str(request.user.id) )
     query = request.GET.get('q')
 
     if query:

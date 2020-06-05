@@ -6,119 +6,426 @@
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock %}
 {% block body %}
-    <div class="container-fluid" style="top: 75px; position: relative;">
-        <div class="row mt-5">
-            <div class="col-sm-4">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="{% static 'img/python_icon.png' %}" alt="card image"></p>
-                                    <h4 class="card-title">Proje Yaptırmak İstiyorum</h4>
-                                    <p class="card-text">Proje yaptırmak istiyorsanız buraya yaklaşın.</p>
-                                </div>
+
+<div class="container-fluid" style="top: 75px; position: relative;">
+    <div class="row mt-5">
+        <div class="col-sm-4">
+            <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                <div class="mainflip">
+                    <div class="frontside">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <p><img class=" img-fluid" src="{% static 'img/python_icon.png' %}" alt="card image"></p>
+                                <h4 class="card-title">Proje Yaptırmak İstiyorum</h4>
+                                <p class="card-text">Proje yaptırmak istiyorsanız buraya yaklaşın.</p>
                             </div>
                         </div>
-                        <div class="backside">
-                            <div class="card">
-                                <div class="card-body text-center mt-4" style="position: relative;">
-                                    <p style="position: absolute;top: 18px;left: 121px;"><img class=" img-fluid" src="{% static 'img/beyaz.png' %}" alt="card image"></p>
-                                    <h4 class="card-title">Proje Yaptırmak İstiyorum</h4>
-                                    <p class="card-text">Proje mi yaptırmak istiyorsunuz? O zaman bu site tam size göre hemen projenizi paylaşın. Projenize en uygun çözümü sunan kişilerle çalışın.</p>
+                    </div>
+                    <div class="backside">
+                        <div class="card">
+                            <div class="card-body text-center mt-4" style="position: relative;">
+                                <p style="position: absolute;top: 18px;left: 111px;"><img class=" img-fluid" src="{% static 'img/beyaz.png' %}" alt="card image"></p>
+                                <h4 class="card-title">Proje Yaptırmak İstiyorum</h4>
+                                <p class="card-text">Proje mi yaptırmak istiyorsunuz? O zaman bu site tam size göre hemen projenizi paylaşın. Projenize en uygun çözümü sunan kişilerle çalışın.</p>
 
-                                    <div class="text-center">
-                                        <a href="{% if request.user.is_authenticated %}{% url  'project:create' %}{% endif %} {% if not request.user.is_authenticated %}{% url  'accounts:login' %}{% endif %}" class="btn btn-primary rounded-0">Proje Ekle</a>
-                                    </div>
+                                <div class="text-center">
+                                    <a href="{% if request.user.is_authenticated %}{% url  'project:create' %}{% endif %} {% if not request.user.is_authenticated %}{% url  'accounts:login' %}{% endif %}" class="btn btn-primary rounded-0">Proje Ekle</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="{% static 'img/teacher.png' %}" alt="card image"></p>
-                                    <h4 class="card-title"><p class="tm-mb-5">Ders Vermek İstiyorum</h4>
-                                    <p class="card-text">Ders Vermek istiyorsanız buraya yaklaşın.</p>
-                                </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                <div class="mainflip">
+                    <div class="frontside">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <p><img class=" img-fluid" src="{% static 'img/teacher.png' %}" alt="card image"></p>
+                                <h4 class="card-title"><p class="tm-mb-5">Ders Vermek İstiyorum</h4>
+                                <p class="card-text">Ders Vermek istiyorsanız buraya yaklaşın.</p>
                             </div>
                         </div>
-                        <div class="backside">
-                            <div class="card">
-                                <div class="card-body text-center mt-4" style="position: relative;">
-                                    <p style="position: absolute;top: 18px;left: 121px;"><img class=" img-fluid" src="{% static 'img/beyaz.png' %}" alt="card image"></p>
-                                    <h4 class="card-title">Ders Vermek İstiyorum</h4>
-                                    <p class="card-text">Ders verip para mı kazanmak istiyorsunuz? O zaman doğru yerdesiniz. Verdiğiniz ders bilgilerini ekleyin ve hemen kazanmaya başlayın.</p>
+                    </div>
+                    <div class="backside">
+                        <div class="card">
+                            <div class="card-body text-center mt-4" style="position: relative;">
+                                <p style="position: absolute;top: 18px;left: 111px;"><img class=" img-fluid" src="{% static 'img/beyaz.png' %}" alt="card image"></p>
+                                <h4 class="card-title">Ders Vermek İstiyorum</h4>
+                                <p class="card-text">Ders verip para mı kazanmak istiyorsunuz? O zaman doğru yerdesiniz. Verdiğiniz ders bilgilerini ekleyin ve hemen kazanmaya başlayın.</p>
 
-                                    <div class="text-center">
-                                        <a href="{% if request.user.is_authenticated %}{% url  'course:create' %}{% endif %} {% if not request.user.is_authenticated %}{% url  'accounts:login' %}{% endif %}" class="btn btn-primary rounded-0">Ders Ekle</a>
-                                    </div>
+                                <div class="text-center">
+                                    <a href="{% if request.user.is_authenticated %}{% url  'course:create' %}{% endif %} {% if not request.user.is_authenticated %}{% url  'accounts:login' %}{% endif %}" class="btn btn-primary rounded-0">Ders Ekle</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-            <div class="col-sm-4">
-                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                    <div class="mainflip">
-                        <div class="frontside">
-                            <div class="card">
-                                <div class="card-body text-center">
-                                    <p><img class=" img-fluid" src="{% static 'img/graduate.png' %}" alt="card image"></p>
-                                    <h4 class="card-title"><p class="tm-mb-5">Ders Almak İstiyorum</h4>
-                                    <p class="card-text">Ders Almak istiyorsanız buraya yaklaşın.</p>
+
+        </div>
+        <div class="col-sm-4">
+            <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                <div class="mainflip">
+                    <div class="frontside">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <p><img class=" img-fluid" src="{% static 'img/graduate.png' %}" alt="card image"></p>
+                                <h4 class="card-title"><p class="tm-mb-5">Ders Almak İstiyorum</h4>
+                                <p class="card-text">Ders Almak istiyorsanız buraya yaklaşın.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="backside">
+                        <div class="card">
+                            <div class="card-body text-center mt-4" style="position: relative;">
+                                <p style="position: absolute;top: 18px;left: 111px;"><img class=" img-fluid" src="{% static 'img/beyaz.png' %}" alt="card image"></p>
+                                <h4 class="card-title">Ders Almak İstiyorum</h4>
+                                <p class="card-text">Ders almak için en doğru adrestesiniz. Hemen istediğiniz dersi girin ve öğrenmeye başlayın. Eğitmenler ile iletişime geçin.</p>
+
+                                <div class="text-center">
+                                    <a href="{% url  'course:index' %}" class="btn btn-secondary rounded-0">Dersleri Görüntüle</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="backside">
-                            <div class="card">
-                                <div class="card-body text-center mt-4" style="position: relative;">
-                                    <p style="position: absolute;top: 18px;left: 121px;"><img class=" img-fluid" src="{% static 'img/beyaz.png' %}" alt="card image"></p>
-                                    <h4 class="card-title">Ders Almak İstiyorum</h4>
-                                    <p class="card-text">Ders almak için en doğru adrestesiniz. Hemen istediğiniz dersi girin ve öğrenmeye başlayın. Eğitmenler ile iletişime geçin.</p>
+                    </div>
+                </div>
+            </div>
 
-                                    <div class="text-center">
-                                        <a href="{% url  'course:index' %}" class="btn btn-secondary rounded-0">Dersleri Görüntüle</a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" style="top: 84px; position: relative;">
+    <div class="row justify-content-center">
+        <div class="card" style="width: 100%;border-radius: 10px;">
+            <div class="card-body" style="box-shadow: 2px 2px 6px #000;padding:5px;background:#CCC;">
+
+                <div class="container-fluid">
+                    <div class="mx-auto col-sm-8 main-section" id="myTab" role="tablist">
+                        <ul class="nav nav-tabs justify-content-end" style="width:1005px;">
+                            <li class="nav-item">
+                            <a class="nav-link active" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="false">Dersler</a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link" id="form-tab" data-toggle="tab" href="#form" role="tab" aria-controls="form" aria-selected="true">Projeler</a>
+                            </li>
+                            {% if request.user.is_superuser %}
+                            <li class="nav-item">
+                            <a class="nav-link" id="kullanici-tab" data-toggle="tab" href="#kullanicii" role="tab" aria-controls="kullanicii" aria-selected="true">Kullanıcılar</a>
+                            </li>
+                            {% endif %}
+                        </ul>
+
+                        <div class="tab-content" id="myTabContent" style="width:1005px;">
+                            {% if request.user.is_superuser %}
+                            <div class="tab-pane fade show" id="kullanicii" role="tabpanel" aria-labelledby="list-tab">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>Kullanıcılar</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <form method="get" role="search">
+                                            <div class="row justify-content-end">
+                                                <div class="col-sm-4" style="right: 18px;">
+                                                    <div class="row">
+                                                        <div class="col-sm-10">
+                                                            <input class="form-control mb-3" type="search" aria-label="Ara" style="height: 35px;width:250px;" aria-describedby="inputGroup-sizing-lg" name="q3" value="{{ request.GET.q3 }}">
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <button class="btn btn-primary" type="submit">Ara</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <table id="kullaniciList" class="table table-bordered table-hover table-striped">
+                                            <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Ad</th>
+                                                <th scope="col">Soyad</th>
+                                                <th scope="col">Kayıt Tarihi</th>
+                                                <th scope="col">E-Mail</th>
+                                                <th scope="col">Cep Telefonu</th>
+                                                <th scope="col">Eğitmenlik Puanı</th>
+                                                <th scope="col">Toplam Ders</th>
+                                                <th scope="col">Şuanki Ders</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for user in users %}
+                                            <tr>
+                                                <th scope="row">{{ forloop.counter }}</th>
+                                                <td>{{ user.name }}</td>
+                                                <td>{{ user.surname }}</td>
+                                                <td>{{ user.register_date }}</td>
+                                                <td>{{ user.mail }}</td>
+                                                <td>{% if user.cep_tel %}{{ user.cep_tel }}{% endif %}{% if not user.cep_tel %}Belirtilmemiş{% endif %}</td>
+                                                <td>{% if user.instructor_score %}{{ user.instructor_score }}{% endif %}{% if not user.instructor_score %}Belirtilmemiş{% endif %}</td>
+                                                <td>{{ user.total_course_number }}</td>
+                                                <td>{{ user.current_course_number }}</td>
+                                                <td>
+                                                    <div style="text-align:center;">
+                                                        <button style="background-color:green;border-radius:5px;width:39px;height: 35px;" data-toggle="tooltip" data-placement="right" title="Kullanıcı İncele">
+                                                            <a href="{{ user.get_absolute_url }}"><i class="fas fa-angle-double-right" style="color:white;"></i></a>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+
+                                        <div class="row justify-content-center mt-3">
+                                            <ul class="pagination">
+                                                <li class="page-item {% if not users.has_previous %}disabled{% endif %}">
+                                                    <a class="page-link" {% if users.has_previous %} href="?sayfa3={{ users.previous_page_number }}{% if request.GET.q3 %}&q3={{ request.GET.q3 }}{% endif %}" {% endif %} tabindex="-1" aria-disabled="true">Önceki</a>
+                                                </li>
+
+                                                {% for page in users.paginator.page_range %}
+                                                <li class="page-item {% ifequal page users.number %}active{% endifequal %}"><a class="page-link" href="?sayfa3={{ page }}{% if request.GET.q3 %}&q3={{ request.GET.q3 }}{% endif %}">{{ page }}</a></li>
+                                                {% endfor %}
+
+                                                <li class="page-item {% if not users.has_next %}disabled{% endif %}">
+                                                    <a class="page-link" {% if not users.has_next %} href="#" {% endif %} {% if users.has_next %} href="?sayfa3={{ users.next_page_number }}{% if request.GET.q3 %}&q3={{ request.GET.q3 }}{% endif %}" {% endif %} tabindex="-1" aria-disabled="true">Sonraki</a>
+                                                </li>
+
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            <div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>Dersler</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <form method="get" role="search">
+                                            <div class="row justify-content-end">
+                                                <div class="col-sm-4" style="right: 26px;">
+                                                    <div class="row">
+                                                        <div class="col-sm-10">
+                                                            <input class="form-control mb-3" type="search" aria-label="Ara" style="height: 35px;width:250px;" aria-describedby="inputGroup-sizing-lg" name="q" value="{{ request.GET.q }}">
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <button class="btn btn-primary" type="submit">Ara</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                        <table id="dersList" class="table table-bordered table-hover table-striped">
+                                            <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Eğitmen</th>
+                                                <th scope="col">Ders Adı</th>
+                                                <th scope="col">Dersin Konusu</th>
+                                                <th scope="col">Ders Ücreti</th>
+                                                <th scope="col">Durum</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for course in courses %}
+                                            <tr>
+                                                <th scope="row">{{ forloop.counter }}</th>
+                                                <td><a>{% if course.staff.get_full_name%}<a>{{ course.staff.get_full_name }}</a>{% endif %}{% if not course.staff.get_full_name%}<a>{{ course.staff }}</a>{% endif %}</a></td>
+                                                <td>{{ course.name }}</td>
+                                                <td>{{ course.subject }}</td>
+                                                <td>{% if course.price %}{{ course.price }}{% endif %}{% if not course.price %}Belirtilmemiş{% endif %}</td>
+                                                <td>{% if course.state %}Aktif{% endif %}{% if not course.state %}Pasif{% endif %}</td>
+                                                {% ifequal request.user course.staff %}
+                                                <td>
+                                                    <div style="text-align:center;">
+                                                        <button style="background-color:blue;border-radius:5px;;width:39px;height: 35px;" data-toggle="tooltip" data-placement="right" title="Güncelle">
+                                                            <a href="{{ course.get_update_url }}"><i class="fas fa-edit" style="color:white;"></i></a>
+                                                        </button> |
+                                                        <button style="background-color:red;border-radius:5px;;width:39px;height: 35px;" data-toggle="tooltip" data-placement="right" title="Sil">
+                                                            <a href="{{ course.get_delete_url }}"><i class="fas fa-times" style="color:white;"></i></a>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                                {% endifequal %}
+                                                {% ifnotequal request.user course.staff %}
+                                                <td>
+                                                    {% if course.state %}
+                                                    <div style="text-align:center;">
+                                                        <button style="background-color:green;border-radius:5px;width:39px;height: 35px;" data-toggle="tooltip" data-placement="right" title="Dersi İncele">
+                                                            <a href="{{ course.get_absolute_url }}"><i class="fas fa-angle-double-right" style="color:white;"></i></a>
+                                                        </button>
+                                                    </div>
+                                                    {% endif %}
+                                                </td>
+                                                {% endifnotequal %}
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+
+                                        <div class="row justify-content-center mt-3">
+                                            <ul class="pagination">
+                                                <li class="page-item {% if not courses.has_previous %}disabled{% endif %}">
+                                                    <a class="page-link" {% if not course.has_previous %} href="#" {% endif %} {% if courses.has_previous %} href="?sayfa1={{ courses.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" {% endif %} tabindex="-1" aria-disabled="true">Önceki</a>
+                                                </li>
+
+                                                {% for page in courses.paginator.page_range %}
+                                                <li class="page-item {% ifequal page courses.number %}active{% endifequal %}"><a class="page-link" href="?sayfa1={{ page }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ page }}</a></li>
+                                                {% endfor %}
+
+                                                <li class="page-item {% if not courses.has_next %}disabled{% endif %}">
+                                                    <a class="page-link" {% if not courses.has_next %} href="#" {% endif %} {% if courses.has_next %} href="?sayfa1={{ courses.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" {% endif %} tabindex="-1" aria-disabled="true">Sonraki</a>
+                                                </li>
+
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="form" role="tabpanel" aria-labelledby="form-tab">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>Projeler</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <form method="get" role="search">
+                                            <div class="row justify-content-end">
+                                                <div class="col-sm-4" style="right: 26px;">
+                                                    <div class="row">
+                                                        <div class="col-sm-10">
+                                                            <input class="form-control mb-3" type="search" aria-label="Ara" style="height: 35px;width:250px;" aria-describedby="inputGroup-sizing-lg" name="q2" value="{{ request.GET.q2 }}">
+                                                        </div>
+                                                        <div class="col-sm-2">
+                                                            <button class="btn btn-primary" type="submit">Ara</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                        <table id="projeList" class="table table-bordered table-hover table-striped">
+                                            <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Proje Sahibi</th>
+                                                <th scope="col">Proje Adı</th>
+                                                <th scope="col">Fiyat</th>
+                                                <th scope="col">Tamamlanma Tarihi</th>
+                                                <th scope="col">Durumu</th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for project in projects %}
+                                            <tr>
+                                                <th scope="row">{{ forloop.counter }}</th>
+                                                <td>{% if project.project_owner.get_full_name%}<a>{{ project.project_owner.get_full_name }}</a>{% endif %}{% if not project.project_owner.get_full_name%}<a>{{ project.project_owner }}</a>{% endif %}</td>
+                                                <td>{{ project.name }}</td>
+                                                <td>{% if project.price %}{{ project.price }}{% endif %}{% if not project.price %}Belirtilmemiş{% endif %}</td>
+                                                <td>{{ project.deadline }}</td>
+                                                <td>{% if project.done %}Tamamlandı{% endif %}{% if not project.done %}Tamamlanmadı{% endif %}</td>
+                                                {% ifequal request.user project.project_owner %}
+                                                <td>
+                                                    {% if not project.done %}
+                                                    <div style="text-align:center;">
+                                                        <button style="background-color:blue;border-radius:5px;width:39px;height: 35px;" data-toggle="tooltip" data-placement="right" title="Güncelle">
+                                                            <a href="{{ project.get_update_url }}"><i class="fas fa-edit" style="color:white;"></i></a>
+                                                        </button> |
+                                                        <button style="background-color:red;border-radius:5px;width:39px;height: 35px;" data-toggle="tooltip" data-placement="right" title="Sil">
+                                                            <a href="{{ project.get_delete_url }}"><i class="fas fa-times" style="color:white;"></i></a>
+                                                        </button>
+                                                    </div>
+                                                    {% endif %}
+                                                    {% if project.done %}
+                                                    <div style="text-align:center;">
+                                                        <i class="fas fa-check-circle" style="color:green;"></i>
+                                                    </div>
+                                                    {% endif %}
+
+                                                </td>
+                                                {% endifequal %}
+                                                {% ifnotequal request.user project.project_owner %}
+                                                <td>
+                                                    {% if not project.done %}
+                                                    <div style="text-align:center;">
+                                                        <button style="background-color:green;border-radius:5px;width:39px;height: 35px;" data-toggle="tooltip" data-placement="right" title="Projeyi İncele">
+                                                            <a href="{{ project.get_absolute_url }}"><i class="fas fa-angle-double-right" style="color:white;"></i></a>
+                                                        </button>
+                                                    </div>
+                                                    {% endif %}
+
+                                                    {% if project.done %}
+                                                    <div style="text-align:center;">
+                                                        <i class="fas fa-check-circle" style="color:green;"></i>
+                                                    </div>
+                                                    {% endif %}
+                                                </td>
+                                                {% endifnotequal %}
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+
+                                        <div class="row justify-content-center mt-3">
+                                            <ul class="pagination">
+                                                <li class="page-item {% if not projects.has_previous %}disabled{% endif %}">
+                                                    <a class="page-link" {% if not project.has_previous %} href="#" {% endif %} {% if projects.has_previous %} href="?sayfa2={{ projects.previous_page_number }}{% if request.GET.q2 %}&q2={{ request.GET.q2 }}{% endif %}" {% endif %} tabindex="-1" aria-disabled="true">Önceki</a>
+                                                </li>
+
+                                                {% for page in projects.paginator.page_range %}
+                                                <li class="page-item {% ifequal page projects.number %}active{% endifequal %}"><a class="page-link" href="?sayfa2={{ page }}{% if request.GET.q2 %}&q2={{ request.GET.q2 }}{% endif %}">{{ page }}</a></li>
+                                                {% endfor %}
+
+                                                <li class="page-item {% if not projects.has_next %}disabled{% endif %}">
+                                                    <a class="page-link" {% if not projects.has_next %} href="#" {% endif %} {% if projects.has_next %} href="?sayfa2={{ projects.next_page_number }}{% if request.GET.q2 %}&q2={{ request.GET.q2 }}{% endif %}" {% endif %} tabindex="-1" aria-disabled="true">Sonraki</a>
+                                                </li>
+
+                                            </ul>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
-    <hr style="top: 75px; position: relative;">
-    <div class="container-fluid mb-4" style="top: 75px; position: relative;">
-        <div class="row">
-            <div class="col-sm-4" style="text-align:center;">
-                <h3 class="tm-text-primary tm-mb-4">Yararlı İçerikler</h3><br>
-                <a href="https://docs.djangoproject.com/en/3.0/">Django Dökümantasyonu</a><br><br>
-                <a href="https://www.youtube.com/playlist?list=PLPrHLaayVkhny4WRNp05C1qRl1Aq3Wswh">Django ile Web Programlama Videoları</a><br><br>
-                <a href="https://fontawesome.com/icons?d=gallery">Font Awesome</a>
-            </div>
-            <div class="col-sm-4" style="text-align:center;">
-                <h3 class="tm-text-primary tm-mb-4">Anasayfa</h3><br>
-                <a href="/home">Anasayfa</a><br><br>
-                <a href="/about">Hakkımızda</a><br><br>
-                <a href="{% url  'contact:create' %}">İletişim</a>
+</div>
 
-            </div>
-            <div class="col-sm-4" style="text-align:center;">
-                <h3 class="tm-text-primary tm-mb-4">Sosyal Medya</h3>
-                <a href="https://youtube.com" class="tm-social-link"><i class="fab fa-youtube tm-social-icon"></i></a>
-                <a href="https://fb.com/templatemo" class="tm-social-link"><i class="fab fa-facebook tm-social-icon"></i></a>
-                <a href="https://twitter.com" class="tm-social-link"><i class="fab fa-twitter tm-social-icon"></i></a>
-                <a href="https://instagram.com" class="tm-social-link"><i class="fab fa-instagram tm-social-icon"></i></a>
-            </div>
+<div class="container-fluid mb-4" style="top: 120px; position: relative;">
+    <div class="row">
+        <div class="col-sm-4" style="text-align:center;">
+            <h3 class="tm-text-primary tm-mb-4">Yararlı İçerikler</h3><br>
+            <a href="https://docs.djangoproject.com/en/3.0/">Django Dökümantasyonu</a><br><br>
+            <a href="https://www.youtube.com/playlist?list=PLPrHLaayVkhny4WRNp05C1qRl1Aq3Wswh">Django ile Web Programlama Videoları</a><br><br>
+            <a href="https://fontawesome.com/icons?d=gallery">Font Awesome</a>
         </div>
+        <div class="col-sm-4" style="text-align:center;">
+            <h3 class="tm-text-primary tm-mb-4">Anasayfa</h3><br>
+            <a href="/home">Anasayfa</a><br><br>
+            <a href="/about">Hakkımızda</a><br><br>
+            <a href="{% url  'contact:create' %}">İletişim</a>
+
+        </div>
+        <div class="col-sm-4" style="text-align:center;">
+            <h3 class="tm-text-primary tm-mb-4">Sosyal Medya</h3>
+            <a href="https://youtube.com" class="tm-social-link"><i class="fab fa-youtube tm-social-icon"></i></a>
+            <a href="https://fb.com/templatemo" class="tm-social-link"><i class="fab fa-facebook tm-social-icon"></i></a>
+            <a href="https://twitter.com" class="tm-social-link"><i class="fab fa-twitter tm-social-icon"></i></a>
+            <a href="https://instagram.com" class="tm-social-link"><i class="fab fa-instagram tm-social-icon"></i></a>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

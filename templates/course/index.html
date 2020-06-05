@@ -40,7 +40,6 @@
                             <thead class="thead-light">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Eğitmen</th>
                                 <th scope="col">Ders Adı</th>
                                 <th scope="col">Dersin Konusu</th>
                                 <th scope="col">Ders Ücreti</th>
@@ -52,7 +51,6 @@
                             {% for course in courses %}
                             <tr>
                                 <th scope="row">{{ forloop.counter }}</th>
-                                <td><a class="kullanici"href="#">{{ course.staff }}</a></td>
                                 <td>{{ course.name }}</td>
                                 <td>{{ course.subject }}</td>
                                 <td>{% if course.price %}{{ course.price }}{% endif %}{% if not course.price %}Belirtilmemiş{% endif %}</td>
@@ -108,19 +106,4 @@
 		</div>
 	</div>
 </div>
-
-<script>
-$('.kullanici').click(function() {
-    var kullaniciAdi = $(this)[0].innerHTML;
-    console.log(kullaniciAdi);
-    $.ajax({
-      type: "get",
-      url: '{% url 'user:show_profile' %}',
-      data: kullaniciAdi,
-      success: function(result){
-
-      }
-    });
-});
-</script>
 {% endblock %}

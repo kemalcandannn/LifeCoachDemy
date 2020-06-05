@@ -9,7 +9,7 @@ from django.db.models import Q
 # Create your views here.
 
 def course_index(request):
-    course_list = Course.objects.raw('SELECT * FROM course_course')
+    course_list = Course.objects.raw('SELECT * FROM course_course WHERE staff_id = ' + str(request.user.id) )
     query = request.GET.get('q')
 
     if query:
@@ -33,6 +33,14 @@ def course_index(request):
     return render(request, 'course/index.html', {'courses': courses})
 
 def course_detail(request, slug):
+    course = get_object_or_404(Course, slug=slug)
+
+    context = {
+        'course' : course
+    }
+    return render(request, 'course/detail.html', context)
+
+def my_course_detail(request, slug):
     course = get_object_or_404(Course, slug=slug)
 
     context = {
