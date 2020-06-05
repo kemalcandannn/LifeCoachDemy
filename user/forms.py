@@ -7,4 +7,10 @@ class UserForm(forms.ModelForm):
         model = User
         fields = [
             'name',
+            'surname',
+            'mail',
+            'cep_tel',
+            # 'profession',
+            'photo',
+            'experience',
         ]

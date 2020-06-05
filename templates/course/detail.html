@@ -1,27 +1,83 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %} {{ course.name }} {% endblock %}
+{% block title %}{{ course.name }}{% endblock %}
 
 {% block body %}
+<style>
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
 
-<div class="container">
-    <div class="row" style="margin-top:20px;">
-        <div class="col-md-4"></div>
-        <div class="col-md-8">
-            <div class="card" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title">{{ course.name }}</h5>
-                <h6>Dersi Veren Kişi: {{ course.staff.get_full_name }}</h6>
-                <p class="card-text">{{ course.content|safe|linebreaks }}</p>
-                {% if request.user.is_authenticated %}
-                  <a href="{{ course.get_update_url }}" class="btn btn-outline-dark">Güncelle</a>
-                  <a href="{{ course.get_delete_url }}" class="btn btn-danger">Sil</a>
-                {% endif %}
-              </div>
+
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+</style>
+<div class="container-fluid" style="position:relative;margin-bottom:20px;">
+    <div class="row justify-content-center">
+        <div class="card" style="width: 40%;border-radius: 10px;">
+            <div class="card-body" style="box-shadow: 2px 2px 6px #000;padding:5px;background:#CCC;max-height: 500px;overflow-y: auto;overflow-x: hidden;">
+                <h1 style="text-align:center;">Ders Bilgileri</h1><hr>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-11">
+                        <label style="font-weight:bold;margin-right:68px;">Eğitmen: </label>
+                        <label>{{ course.staff }}</label>
+                    </div>
+
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-11">
+                        <label style="font-weight:bold;margin-right:52px;">Dersin Adı: </label>
+                        <label>{{ course.name }}</label>
+                    </div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-11">
+                        <label style="font-weight:bold;margin-right:23px;">Dersin Konusu: </label>
+                        <label>{{ course.subject }}</label>
+                    </div>
+                    <div class="col-sm-1"></div>
+
+                    <div class="col-sm-11">
+                        <label style="font-weight:bold;margin-right:50px;">Ders Ücreti: </label>
+                        <label>{% if course.price %}{{ course.price }}{% endif %}{% if not course.price %}Belirtilmemiş{% endif %}</label>
+                    </div>
+
+                    <div class="col-sm-1"></div>
+
+                    <div class="col-sm-11">
+                        <label style="font-weight:bold;margin-right:33px;">Ders Durumu: </label>
+                        <label>{% if course.state %}Aktif{% endif %}{% if not course.state %}Pasif{% endif %}</label>
+                    </div>
+
+                    <div class="col-sm-1"></div>
+
+                    <div class="col-sm-11">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label style="font-weight:bold;">Ders İçeriği: </label>
+                            </div>
+                            <div class="col-sm-9">
+                                <label>{{ course.content|safe }}</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row justify-content-center mt-4 mb-4">
+                <a href="{% url  'course:index' %}" class="btn btn-success rounded-0">Derse Katıl</a>
+            </div>
             </div>
         </div>
     </div>
 </div>
-
 
 {% endblock %}

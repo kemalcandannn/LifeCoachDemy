@@ -5,7 +5,6 @@ from django.contrib import messages
 from django.utils.text import slugify
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
-
 # Create your views here.
 
 def user_index(request):
@@ -43,11 +42,12 @@ def user_create(request):
 
     if form.is_valid():
         user = form.save(commit=False)
-        user.staff = request.user
+        user.user = request.user
         user.save()
 
         messages.success(request, 'Kullanıcı başarılı bir şekilde oluşturuldu.')
-        return HttpResponseRedirect(user.get_absolute_url())
+        return redirect('/home')
+
 
     context = {
         'form' : form
@@ -79,3 +79,14 @@ def user_delete(request, slug):
     user.delete()
     messages.error(request, 'Kullanıcı başarılı bir şekilde silindi.')
     return redirect('user:index')
+
+def profile_view(request):
+    if not request.user.is_authenticated:
+        return Http404()
+
+    user = request.user
+
+    context = {
+        'user' : user
+    }
+    return render(request, 'user/profile_view.html', context)

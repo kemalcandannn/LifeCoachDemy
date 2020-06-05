@@ -1,5 +1,11 @@
 from django import forms
+from django.forms import DateTimeInput
+
 from .models import Project
+
+
+class DateTimeInput(DateTimeInput):
+    input_type = 'datetime'
 
 class ProjectForm(forms.ModelForm):
 
@@ -9,8 +15,10 @@ class ProjectForm(forms.ModelForm):
             'name',
             'content',
             'documentation',
-            'lower_price',
-            'upper_price',
+            'price',
             'deadline',
-
+            'done',
         ]
+        widgets = {
+            'deadline': DateTimeInput()
+        }

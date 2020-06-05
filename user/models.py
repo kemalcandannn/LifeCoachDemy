@@ -1,24 +1,24 @@
+from datetime import datetime
+
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from ckeditor.fields import RichTextField
-from phonenumber_field.modelfields import PhoneNumberField
-
-# Create your models here.
 
 class User(models.Model):
+    user = models.ForeignKey('auth.User', verbose_name='Kullanıcı', related_name='users', on_delete=models.CASCADE)
     name = models.CharField(max_length=150, verbose_name='Ad')
     surname = models.CharField(max_length=150, verbose_name='Soyad')
-    register_date = models.DateTimeField(verbose_name='Kayıt Tarihi')
-    mail = models.EmailField(verbose_name='E-Mail')
-    cep_tel = PhoneNumberField(null=False, blank=False, unique=True)
+    register_date = models.DateTimeField(verbose_name='Kayıt Tarihi', editable=False)
+    mail = models.EmailField(verbose_name='E-Mail', unique=True)
+    cep_tel = models.CharField(max_length=20, null=True, blank=True, unique=True)
     #profession = models.ForeignKey()
-    photo = models.ImageField(verbose_name='Dökümantasyon', null=True, blank=True)
+    photo = models.ImageField(verbose_name='Fotoğraf', null=True, blank=True)
 
     #VerilenDersler
 
     experience = RichTextField(verbose_name='Tecrübe', null=True, blank=True)
-    instructor_score = models.IntegerField(verbose_name='Eğitmenlik Puanı')
+    instructor_score = models.IntegerField(verbose_name='Eğitmenlik Puanı',null=True, blank=True)
     total_course_number = models.IntegerField(verbose_name='Şimdiye Kadar Verilen Dersler', default=0)
     current_course_number = models.IntegerField(verbose_name='Güncel Ders Sayısı', default=0)
 
@@ -50,5 +50,7 @@ class User(models.Model):
         return unique_slug
 
     def save(self, *args, **kwargs):
+        if not self.id:
+            self.register_date = datetime.now()
         self.slug = self.get_unique_slug()
         return super(User, self).save(*args, **kwargs)

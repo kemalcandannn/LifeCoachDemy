@@ -9,4 +9,6 @@ class CourseForm(forms.ModelForm):
             'name',
             'subject',
             'content',
+            'price',
+            'state',
         ]

@@ -1,54 +1,125 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 
 {% block title %} Projeler {% endblock %}
 
 {% block body %}
-    <div class="row justify-content-center mt-3">
-        <div class="col-sm-3">
-            <form method="get" role="search" class="form-inline my-2 my-lg-0">
-                <div class="input-group input-group-lg">
-                    <input class="form-control mb-3" type="search" aria-label="Ara" aria-describedby="inputGroup-sizing-lg" name="q" value="{{ request.GET.q }}">
-                    <button class="btn btn-success my-2 my-sm-0" type="submit" style="height: 50px;">Ara</button>
-                </div>
-            </form>
-        </div>
-    </div>
+	<div class="container-fluid">
+	<div class="mx-auto col-sm-8 main-section" id="myTab" role="tablist">
+		<ul class="nav nav-tabs justify-content-end">
+			<li class="listelemeTab">
+			    <a class="nav-link active" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="false">Liste</a>
+			</li>
+			<li class="listelemeTab">
+    			<a class="nav-link" id="form-tab" href="{% if request.user.is_authenticated %}{% url  'project:create' %}{% endif %} {% if not request.user.is_authenticated %}{% url  'accounts:login' %}{% endif %}" aria-selected="true">Proje Ekle</a>
+			</li>
+		</ul>
+		<div class="tab-content" id="myTabContent">
+			<div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
+				<div class="card">
+					<div class="card-header">
+						<h4>Projeler</h4>
+					</div>
+					<div class="card-body">
+                        <form method="get" role="search">
+                            <div class="row justify-content-end">
+                                <div class="col-sm-4" style="right: 52px;">
+                                    <div class="row">
+                                        <div class="col-sm-10">
+                                            <input class="form-control mb-3" type="search" aria-label="Ara" style="height: 35px;width:250px;" aria-describedby="inputGroup-sizing-lg" name="q" value="{{ request.GET.q }}">
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <button class="btn btn-primary" type="submit">Ara</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
 
-    {% for project in projects %}
-        <div class="container">
-            <div class="row justify-content-center" style="margin-top:20px;">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ project.name }}</h5>
-                        <h6>Proje Sahibi: {{ project.project_owner.get_full_name }}</h6>
-                        <p class="card-text">{{ project.content|safe|linebreaks|truncatechars:34 }}</p>
-                        <a href="{{ project.get_absolute_url }}" class="btn btn-primary">İncele</a>
+                        <table id="userList" class="table table-bordered table-hover table-striped">
+                            <thead class="thead-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Proje Sahibi</th>
+                                <th scope="col">Proje Adı</th>
+                                <th scope="col">Fiyat</th>
+                                <th scope="col">Tamamlanma Tarihi</th>
+                                <th scope="col">Durumu</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for project in projects %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td>{% if project.project_owner.get_full_name%}<a href="{{ project.get_absolute_url }}">{{ project.project_owner.get_full_name }}</a>{% endif %}{% if not project.project_owner.get_full_name%}<a href="#">{{ project.project_owner }}</a>{% endif %}</td>
+                                <td>{{ project.name }}</td>
+                                <td>{% if project.price %}{{ project.price }}{% endif %}{% if not project.price %}Belirtilmemiş{% endif %}</td>
+                                <td>{{ project.deadline }}</td>
+                                <td>{% if project.done %}Tamamlandı{% endif %}{% if not project.done %}Tamamlanmadı{% endif %}</td>
+                                {% ifequal request.user project.project_owner %}
+                                <td>
+                                    {% if not project.done %}
+                                    <div style="text-align:center;">
+                                        <button style="background-color:blue;border-radius:5px;width:39px;height: 35px;" data-toggle="tooltip" data-placement="right" title="Güncelle">
+                                            <a href="{{ project.get_update_url }}"><i class="fas fa-edit" style="color:white;"></i></a>
+                                        </button> |
+                                        <button style="background-color:red;border-radius:5px;width:39px;height: 35px;" data-toggle="tooltip" data-placement="right" title="Sil">
+                                            <a href="{{ project.get_delete_url }}"><i class="fas fa-times" style="color:white;"></i></a>
+                                        </button>
+                                    </div>
+                                    {% endif %}
+                                    {% if project.done %}
+                                    <div style="text-align:center;">
+                                        <i class="fas fa-check-circle" style="color:green;"></i>
+                                    </div>
+                                    {% endif %}
 
-                        {% if request.user.is_authenticated %}
-                            <a href="{{ project.get_update_url }}" class="btn btn-outline-dark">Güncelle</a>
-                            <a href="{{ project.get_delete_url }}" class="btn btn-danger">Sil</a>
-                        {% endif %}
+                                </td>
+                                {% endifequal %}
+                                {% ifnotequal request.user project.project_owner %}
+                                <td>
+                                    {% if not project.done %}
+                                    <div style="text-align:center;">
+                                        <button style="background-color:green;border-radius:5px;width:39px;height: 35px;" data-toggle="tooltip" data-placement="right" title="Projeyi İncele">
+                                            <a href="{{ project.get_absolute_url }}"><i class="fas fa-angle-double-right" style="color:white;"></i></a>
+                                        </button>
+                                    </div>
+                                    {% endif %}
+
+                                    {% if project.done %}
+                                    <div style="text-align:center;">
+                                        <i class="fas fa-check-circle" style="color:green;"></i>
+                                    </div>
+                                    {% endif %}
+                                </td>
+                                {% endifnotequal %}
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                        <div class="row justify-content-center mt-3">
+                            <ul class="pagination">
+                                <li class="page-item {% if not projects.has_previous %}disabled{% endif %}">
+                                    <a class="page-link" {% if not project.has_previous %} href="#" {% endif %} {% if projects.has_previous %} href="?sayfa={{ projects.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" {% endif %} tabindex="-1" aria-disabled="true">Önceki</a>
+                                </li>
+
+                                {% for page in projects.paginator.page_range %}
+                                <li class="page-item {% ifequal page projects.number %}active{% endifequal %}"><a class="page-link" href="?sayfa={{ page }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ page }}</a></li>
+                                {% endfor %}
+
+                                <li class="page-item {% if not projects.has_next %}disabled{% endif %}">
+                                    <a class="page-link" {% if not projects.has_next %} href="#" {% endif %} {% if projects.has_next %} href="?sayfa={{ projects.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" {% endif %} tabindex="-1" aria-disabled="true">Sonraki</a>
+                                </li>
+
+                            </ul>
+
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    {% endfor %}
-
-    <div class="row justify-content-center mt-3">
-        <ul class="pagination">
-            <li class="page-item {% if not projects.has_previous %}disabled{% endif %}">
-                <a class="page-link" {% if not projects.has_previous %} href="#" {% endif %} {% if projects.has_previous %} href="?sayfa={{ projects.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" {% endif %} tabindex="-1" aria-disabled="true">Önceki</a>
-            </li>
-
-            {% for page in projects.paginator.page_range %}
-            <li class="page-item {% ifequal page projects.number %}active{% endifequal %}"><a class="page-link" href="?sayfa={{ page }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ page }}</a></li>
-            {% endfor %}
-
-            <li class="page-item {% if not projects.has_next %}disabled{% endif %}">
-                <a class="page-link" {% if not projects.has_next %} href="#" {% endif %} {% if projects.has_next %} href="?sayfa={{ projects.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" {% endif %} tabindex="-1" aria-disabled="true">Sonraki</a>
-            </li>
-        </ul>
-
-    </div>
-
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 {% endblock %}

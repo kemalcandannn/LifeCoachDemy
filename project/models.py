@@ -11,8 +11,7 @@ class Project(models.Model):
     name = models.CharField(max_length=120, verbose_name='Projenin Adı')
     content = RichTextField(verbose_name='İçerik', null=True, blank=True)
     documentation = models.FileField(verbose_name='Dökümantasyon', null=True, blank=True)
-    lower_price = models.FloatField(verbose_name='Fiyat Alt Sınırı', default=0)
-    upper_price = models.FloatField(verbose_name='Fiyat Üst Sınırı')
+    price = models.FloatField(verbose_name='Fiyat', null=True, blank=True)
     deadline = models.DateTimeField(verbose_name='Proje Teslim Tarihi')
     done = models.BooleanField(verbose_name='Tamamlandı', default=False)
 

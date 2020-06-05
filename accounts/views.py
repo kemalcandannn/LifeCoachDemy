@@ -24,21 +24,10 @@ def register_view(request):
 
         new_user = authenticate(username=user.username,password=password)
         login(request, new_user)
-        return redirect('/home')
+        return redirect('user:create')
 
     return render(request, 'accounts/register.html', {'form': form})
 
 def logout_view(request):
     logout(request)
     return redirect('/index')
-
-def profile_view(request):
-    if not request.user.is_authenticated:
-        return Http404()
-
-    user = request.user
-
-    context = {
-        'user' : user
-    }
-    return render(request, 'accounts/profile_view.html', context)

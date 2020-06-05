@@ -9,15 +9,14 @@ from django.db.models import Q
 # Create your views here.
 
 def project_index(request):
-    project_list = Project.objects.all()
+    project_list = Project.objects.raw('SELECT * FROM project_project')
     query = request.GET.get('q')
+
     if query:
-        project_list = project_list.filter(
-            Q(project_owner__first_name__icontains=query) |
-            Q(project_owner__last_name__icontains=query) |
-            Q(name__icontains=query) |
-            Q(content__icontains=query)
-            ).distinct()
+        project_list = Project.objects.raw('SELECT DISTINCT * FROM project_project WHERE '
+                 '(lower(name) like \'%' + str(query).lower() + '%\') or '
+                 '(lower(content) like \'%' + str(query).lower() + '%\') or '
+                 '(lower(deadline) like \'%' + str(query).lower() + '%\')')
 
     paginator = Paginator(project_list, 5) #Show 5 courses per page
 

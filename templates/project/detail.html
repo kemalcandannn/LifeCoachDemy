@@ -1,32 +1,88 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %} {{ project.name }} {% endblock %}
+{% block title %}{{ project.name }}{% endblock %}
 
 {% block body %}
+<style>
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
 
-<div class="container">
-    <div class="row" style="margin-top:20px;">
-        <div class="col-md-4">
-            {% if project.documentation %}
-                <iframe src="{{ project.documentation.url }}" frameborder="0"></iframe>
 
-            {% endif %}
-        </div>
-        <div class="col-md-8">
-            <div class="card" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title">{{ project.name }}</h5>
-                <h6>Proje Sahibi: {{ course.project_owner.get_full_name }}</h6>
-                <p class="card-text">{{ project.content|safe|linebreaks }}</p>
-                {% if request.user.is_authenticated %}
-                  <a href="{{ project.get_update_url }}" class="btn btn-outline-dark">Güncelle</a>
-                  <a href="{{ project.get_delete_url }}" class="btn btn-danger">Sil</a>
-                {% endif %}
-              </div>
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+</style>
+<div class="container-fluid" style="position:relative;margin-bottom:20px;">
+    <div class="row justify-content-center">
+        <div class="card" style="width: 67%;border-radius: 10px;">
+            <div class="card-body" style="box-shadow: 2px 2px 6px #000;padding:5px;background:#CCC;max-height: 500px;overflow-y: auto;overflow-x: hidden;">
+                <h1 style="text-align:center;">Proje Bilgileri</h1><hr>
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-11">
+                        <label style="font-weight:bold;margin-right:125px;">Proje Sahibi: </label>
+                        <label>{{ project.project_owner }}</label>
+                    </div>
+
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-11">
+                        <label style="font-weight:bold;margin-right:124px;">Projenin Adı: </label>
+                        <label>{{ project.name }}</label>
+                    </div>
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-11">
+                        <label style="font-weight:bold;margin-right:129px;">Proje Ücreti: </label>
+                        <label>{% if project.price %}{{ project.price }}{% endif %}{% if not project.price %}Belirtilmemiş{% endif %}</label>
+                    </div>
+                    <div class="col-sm-1"></div>
+
+                    <div class="col-sm-11">
+                        <label style="font-weight:bold;margin-right:72px;">Tamamlanma Tarihi: </label>
+                        <label>{{ project.deadline }}</label>
+                    </div>
+
+                    <div class="col-sm-1"></div>
+
+                    <div class="col-sm-11">
+                        <label style="font-weight:bold;margin-right:43px;">Proje Dökümantasyonu: </label>
+                        <label>{% if project.documentation %}<a href="{{ project.documentation.url }}">Dökümantasyon</a>{% endif %}</label>
+                    </div>
+
+                    <div class="col-sm-1"></div>
+
+                    <div class="col-sm-11">
+                        <label style="font-weight:bold;margin-right:53px;">Tamamlanma Durumu: </label>
+                        <label>{% if project.done %}Tamamlandı{% endif %}{% if not project.done %}Tamamlanmadı{% endif %}</label>
+                    </div>
+
+                    <div class="col-sm-1"></div>
+
+                    <div class="col-sm-11">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label style="font-weight:bold;">Proje İçeriği: </label>
+                            </div>
+                            <div class="col-sm-9">
+                                <label>{{ project.content|safe }}</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
+
     </div>
 </div>
-
 
 {% endblock %}

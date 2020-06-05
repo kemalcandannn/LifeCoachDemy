@@ -1,93 +1,124 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %} Anasayfa {% endblock %}
-
+{% block extrastyles %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
 {% block body %}
-    <div class="tm-container">
-        <div class="parallax-window" data-parallax="scroll">
-            <div class="container-fluid">
+    <div class="container-fluid" style="top: 75px; position: relative;">
+        <div class="row mt-5">
+            <div class="col-sm-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                    <div class="mainflip">
+                        <div class="frontside">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid" src="{% static 'img/python_icon.png' %}" alt="card image"></p>
+                                    <h4 class="card-title">Proje Yaptırmak İstiyorum</h4>
+                                    <p class="card-text">Proje yaptırmak istiyorsanız buraya yaklaşın.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="backside">
+                            <div class="card">
+                                <div class="card-body text-center mt-4" style="position: relative;">
+                                    <p style="position: absolute;top: 18px;left: 121px;"><img class=" img-fluid" src="{% static 'img/beyaz.png' %}" alt="card image"></p>
+                                    <h4 class="card-title">Proje Yaptırmak İstiyorum</h4>
+                                    <p class="card-text">Proje mi yaptırmak istiyorsunuz? O zaman bu site tam size göre hemen projenizi paylaşın. Projenize en uygun çözümü sunan kişilerle çalışın.</p>
 
-                <!-- Services -->
-                <div class="row tm-mb-5">
-                    <div class="col-lg-4 " style="text-align:center">
-                        <i class="fab fa-python fa-5x tm-icon-2 d-block text-center"></i>
-                        <div class="tm-bg-gray tm-box-2">
-                            <h3 class="tm-text-primary tm-h3">Proje Yaptırmak İstiyorum</h3>
-                            <p class="tm-mb-5">
-                                Proje mi yaptırmak istiyorsunuz? O zaman bu site tam size göre hemen projenizi paylaşın.
-                                Projenize en uygun çözümü sunan kişilerle çalışın.
-                            </p>
-                            <div class="text-center">
-                                <a href="{% if request.user.is_authenticated %}{% url  'project:create' %}{% endif %} {% if not request.user.is_authenticated %}{% url  'accounts:login' %}{% endif %}" class="btn btn-primary rounded-0">Proje Ekle</a>
+                                    <div class="text-center">
+                                        <a href="{% if request.user.is_authenticated %}{% url  'project:create' %}{% endif %} {% if not request.user.is_authenticated %}{% url  'accounts:login' %}{% endif %}" class="btn btn-primary rounded-0">Proje Ekle</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4" style="text-align:center">
-                        <i class="fas fa-chalkboard-teacher fa-5x tm-icon-2 d-block text-center"></i>
-                        <div class="tm-bg-gray tm-box-2">
-                            <h3 class="tm-text-primary tm-h3">Ders Vermek İstiyorum</h3>
-                            <p class="tm-mb-5">
-                                Ders verip para mı kazanmak istiyorsunuz? O zaman doğru yerdesiniz.
-                                Verdiğiniz ders bilgilerini ekleyin ve hemen kazanmaya başlayın.
-                            </p>
-                            <div class="text-center">
-                                <a href="{% if request.user.is_authenticated %}{% url  'course:create' %}{% endif %} {% if not request.user.is_authenticated %}{% url  'accounts:login' %}{% endif %}" class="btn btn-secondary rounded-0">Ders Ekle</a>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                    <div class="mainflip">
+                        <div class="frontside">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid" src="{% static 'img/teacher.png' %}" alt="card image"></p>
+                                    <h4 class="card-title"><p class="tm-mb-5">Ders Vermek İstiyorum</h4>
+                                    <p class="card-text">Ders Vermek istiyorsanız buraya yaklaşın.</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-4" style="text-align:center">
-                        <i class="fas fa-graduation-cap fa-5x tm-icon-2 d-block text-center"></i>
-                        <div class="tm-bg-gray tm-box-2">
-                            <h3 class="tm-text-primary tm-h3">Ders Almak İstiyorum</h3>
-                            <p class="tm-mb-5">
-                                Ders almak için en doğru adrestesiniz. Hemen istediğiniz dersi girin ve öğrenmeye başlayın.
-                                Eğitmenler ile iletişime geçin.
-                            </p>
+                        <div class="backside">
+                            <div class="card">
+                                <div class="card-body text-center mt-4" style="position: relative;">
+                                    <p style="position: absolute;top: 18px;left: 121px;"><img class=" img-fluid" src="{% static 'img/beyaz.png' %}" alt="card image"></p>
+                                    <h4 class="card-title">Ders Vermek İstiyorum</h4>
+                                    <p class="card-text">Ders verip para mı kazanmak istiyorsunuz? O zaman doğru yerdesiniz. Verdiğiniz ders bilgilerini ekleyin ve hemen kazanmaya başlayın.</p>
 
-                            <div class="text-center"><a href="{% url  'course:index' %}" class="btn btn-thirdary rounded-0">Dersleri Görüntüle</a></div>
-
+                                    <div class="text-center">
+                                        <a href="{% if request.user.is_authenticated %}{% url  'course:create' %}{% endif %} {% if not request.user.is_authenticated %}{% url  'accounts:login' %}{% endif %}" class="btn btn-primary rounded-0">Ders Ekle</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-            <div class="container-fluid">
+            </div>
+            <div class="col-sm-4">
+                <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                    <div class="mainflip">
+                        <div class="frontside">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid" src="{% static 'img/graduate.png' %}" alt="card image"></p>
+                                    <h4 class="card-title"><p class="tm-mb-5">Ders Almak İstiyorum</h4>
+                                    <p class="card-text">Ders Almak istiyorsanız buraya yaklaşın.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="backside">
+                            <div class="card">
+                                <div class="card-body text-center mt-4" style="position: relative;">
+                                    <p style="position: absolute;top: 18px;left: 121px;"><img class=" img-fluid" src="{% static 'img/beyaz.png' %}" alt="card image"></p>
+                                    <h4 class="card-title">Ders Almak İstiyorum</h4>
+                                    <p class="card-text">Ders almak için en doğru adrestesiniz. Hemen istediğiniz dersi girin ve öğrenmeye başlayın. Eğitmenler ile iletişime geçin.</p>
 
-                <div id="anasayfa_alt_kisim" class="row tm-mb-1">
-                    <div class="col-sm-4 mb-lg-0 mb-5" style="text-align:center">
-                        <h3 class="tm-text-primary tm-mb-4">Yararlı İçerikler</h3>
-                        <nav class="tm-nav-secondary">
-                            <ul>
-                                <li><a href="https://docs.djangoproject.com/en/3.0/">Django Dökümantasyonu</a></li>
-                                <li><a href="https://www.youtube.com/playlist?list=PLPrHLaayVkhny4WRNp05C1qRl1Aq3Wswh">Django ile Web Programlama Videoları</a></li>
-                                <li><a href="https://templatemo.com/tm-547-real-dynamic">Real Dynamic Şablonu</a></li>
-                                <li><a href="https://fontawesome.com/icons?d=gallery">Font Awesome</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="col-sm-4 mb-lg-0 mb-5" style="text-align:center">
-                        <h3 class="tm-text-primary tm-mb-4">Anasayfa</h3>
-                        <nav class="tm-nav-secondary">
-                            <ul>
-                                <li><a href="/home">Anasayfa</a></li>
-                                <li><a href="/about">Hakkımızda</a></li>
-                                <li><a href="{% url  'contact:create' %}">İletişim</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                    <div class="col-sm-4 mb-lg-0 mb-5" style="text-align:center">
-                        <h3 class="tm-text-primary tm-mb-4">Sosyal Medya</h3>
-                        <p class="tm-mb-4"></p>
-                        <div>
-                            <a href="https://youtube.com" class="tm-social-link"><i class="fab fa-youtube tm-social-icon"></i></a>
-                            <a href="https://fb.com/templatemo" class="tm-social-link"><i class="fab fa-facebook tm-social-icon"></i></a>
-                            <a href="https://twitter.com" class="tm-social-link"><i class="fab fa-twitter tm-social-icon"></i></a>
-                            <a href="https://instagram.com" class="tm-social-link"><i class="fab fa-instagram tm-social-icon"></i></a>
+                                    <div class="text-center">
+                                        <a href="{% url  'course:index' %}" class="btn btn-secondary rounded-0">Dersleri Görüntüle</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div> <!-- container-fluid -->
 
+            </div>
         </div>
     </div>
+    <hr style="top: 75px; position: relative;">
+    <div class="container-fluid mb-4" style="top: 75px; position: relative;">
+        <div class="row">
+            <div class="col-sm-4" style="text-align:center;">
+                <h3 class="tm-text-primary tm-mb-4">Yararlı İçerikler</h3><br>
+                <a href="https://docs.djangoproject.com/en/3.0/">Django Dökümantasyonu</a><br><br>
+                <a href="https://www.youtube.com/playlist?list=PLPrHLaayVkhny4WRNp05C1qRl1Aq3Wswh">Django ile Web Programlama Videoları</a><br><br>
+                <a href="https://fontawesome.com/icons?d=gallery">Font Awesome</a>
+            </div>
+            <div class="col-sm-4" style="text-align:center;">
+                <h3 class="tm-text-primary tm-mb-4">Anasayfa</h3><br>
+                <a href="/home">Anasayfa</a><br><br>
+                <a href="/about">Hakkımızda</a><br><br>
+                <a href="{% url  'contact:create' %}">İletişim</a>
+
+            </div>
+            <div class="col-sm-4" style="text-align:center;">
+                <h3 class="tm-text-primary tm-mb-4">Sosyal Medya</h3>
+                <a href="https://youtube.com" class="tm-social-link"><i class="fab fa-youtube tm-social-icon"></i></a>
+                <a href="https://fb.com/templatemo" class="tm-social-link"><i class="fab fa-facebook tm-social-icon"></i></a>
+                <a href="https://twitter.com" class="tm-social-link"><i class="fab fa-twitter tm-social-icon"></i></a>
+                <a href="https://instagram.com" class="tm-social-link"><i class="fab fa-instagram tm-social-icon"></i></a>
+            </div>
+        </div>
 
 {% endblock %}
