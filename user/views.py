@@ -1,5 +1,7 @@
 from django.contrib.auth import logout
 from django.shortcuts import render, HttpResponse, get_object_or_404, HttpResponseRedirect, redirect, Http404
+
+from contact.models import Contact
 from .models import User
 from .forms import UserForm
 from django.contrib import messages, auth
@@ -96,11 +98,13 @@ def profile_view(request):
 
     user = list(User.objects.raw('SELECT DISTINCT * FROM user_user WHERE user_id = ' + str(request.user.id)))
 
-
     if not user:
         return redirect('user:create')
 
+    contacts = list(Contact.objects.raw('SELECT * FROM contact_contact'))
+
     context = {
-        'user': user[0]
+        'user': user[0],
+        'contacts': contacts
     }
     return render(request, 'user/profile_view.html', context)

@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock %}
 {% block body %}
-
 <div class="container-fluid" style="top: 75px; position: relative;">
     <div class="row mt-5">
         <div class="col-sm-4">
@@ -105,7 +104,7 @@
 
                 <div class="container-fluid">
                     <div class="mx-auto col-sm-8 main-section" id="myTab" role="tablist">
-                        <ul class="nav nav-tabs justify-content-end" style="width:1005px;">
+                        <ul class="nav nav-tabs justify-content-end" style="width:996px;">
                             <li class="nav-item">
                             <a class="nav-link active" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list" aria-selected="false">Dersler</a>
                             </li>
@@ -129,7 +128,7 @@
                                     <div class="card-body">
                                         <form method="get" role="search">
                                             <div class="row justify-content-end">
-                                                <div class="col-sm-4" style="right: 18px;">
+                                                <div class="col-sm-4" style="right: 26px;">
                                                     <div class="row">
                                                         <div class="col-sm-10">
                                                             <input class="form-control mb-3" type="search" aria-label="Ara" style="height: 35px;width:250px;" aria-describedby="inputGroup-sizing-lg" name="q3" value="{{ request.GET.q3 }}">
@@ -150,7 +149,6 @@
                                                 <th scope="col">Kayıt Tarihi</th>
                                                 <th scope="col">E-Mail</th>
                                                 <th scope="col">Cep Telefonu</th>
-                                                <th scope="col">Eğitmenlik Puanı</th>
                                                 <th scope="col">Toplam Ders</th>
                                                 <th scope="col">Şuanki Ders</th>
                                                 <th></th>
@@ -165,7 +163,6 @@
                                                 <td>{{ user.register_date }}</td>
                                                 <td>{{ user.mail }}</td>
                                                 <td>{% if user.cep_tel %}{{ user.cep_tel }}{% endif %}{% if not user.cep_tel %}Belirtilmemiş{% endif %}</td>
-                                                <td>{% if user.instructor_score %}{{ user.instructor_score }}{% endif %}{% if not user.instructor_score %}Belirtilmemiş{% endif %}</td>
                                                 <td>{{ user.total_course_number }}</td>
                                                 <td>{{ user.current_course_number }}</td>
                                                 <td>

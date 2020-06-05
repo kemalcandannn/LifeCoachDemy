@@ -41,12 +41,7 @@
             <div class="form-group row">
                 <label class="col-lg-3 col-form-label form-control-label">Proje Teslim Tarihi</label>
                 <div class="col-lg-9">
-                    <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                        {{ form.deadline }}
-                        <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                        </div>
-                    </div>
+                    {{ form.deadline }}
                 </div>
 
             </div>
@@ -76,42 +71,14 @@
         var yil='';
         var ay='';
         var gun='';
-        var saat='';
-        var dakika='';
-        var saniye='';
 
         yilAyGun = res[0].split("/");
         yil = yilAyGun[2];
         ay = yilAyGun[0];
         gun = yilAyGun[1];
 
-        if(res[2].trim()=='AM'){
-          asd = res[1].trim().split(":");
-          if(asd[0]=='12'){
-            saat = '00';
-            dakika = asd[1];
-            saniye = '00';
-          } else{
-          saat = asd[0];
-          if(parseInt(saat)<10){ saat = '0'+saat}
-          dakika = asd[1];
-          saniye = '00';
-          }
 
-        } else if(res[2].trim()=='PM'){
-          asd = res[1].trim().split(":");
-          if(asd[0]=='12'){
-            saat = '12';
-            dakika = asd[1];
-            saniye = '00';
-          }else{
-          saat = toString(parseInt(asd[0])-12);
-          dakika = asd[1];
-          saniye = '00';
-          }
-        }
-
-        var sonHali = gun+"/"+ay+"/"+yil+" "+saat+":"+dakika+":"+saniye;
+        var sonHali = gun+"/"+ay+"/"+yil+";
         $('input[name="deadline"]').val(sonHali);
     });
 </script>

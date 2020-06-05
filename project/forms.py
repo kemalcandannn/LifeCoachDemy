@@ -1,11 +1,11 @@
 from django import forms
-from django.forms import DateTimeInput
+from django.forms import DateInput
 
 from .models import Project
 
 
-class DateTimeInput(DateTimeInput):
-    input_type = 'datetime'
+class DateInput(DateInput):
+    input_type = 'date'
 
 class ProjectForm(forms.ModelForm):
 
@@ -20,5 +20,5 @@ class ProjectForm(forms.ModelForm):
             'done',
         ]
         widgets = {
-            'deadline': DateTimeInput()
+            'deadline': DateInput()
         }

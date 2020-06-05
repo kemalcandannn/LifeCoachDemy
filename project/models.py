@@ -12,7 +12,7 @@ class Project(models.Model):
     content = RichTextField(verbose_name='İçerik', null=True, blank=True)
     documentation = models.FileField(verbose_name='Dökümantasyon', null=True, blank=True)
     price = models.FloatField(verbose_name='Fiyat', null=True, blank=True)
-    deadline = models.DateTimeField(verbose_name='Proje Teslim Tarihi')
+    deadline = models.DateField(verbose_name='Proje Teslim Tarihi')
     done = models.BooleanField(verbose_name='Tamamlandı', default=False)
 
     slug = models.SlugField(unique=True, editable=False, max_length=130)

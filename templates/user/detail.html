@@ -3,25 +3,71 @@
 {% block title %} {{ user.name }} {% endblock %}
 
 {% block body %}
-
-<div class="container">
-    <div class="row" style="margin-top:20px;">
-        <div class="col-md-4"></div>
-        <div class="col-md-8">
-            <div class="card" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title">{{ user.name }}</h5>
-                <h6>Dersi Veren Kişi: {{ user.name }} {{ user.surname }}</h6>
-                <p class="card-text">{{ user.experience|safe|linebreaks }}</p>
-                {% if request.user.is_authenticated %}
-                  <a href="{{ user.get_update_url }}" class="btn btn-outline-dark">Güncelle</a>
-                  <a href="{{ user.get_delete_url }}" class="btn btn-danger">Sil</a>
+<div class="container-fluid" style="position:relative;margin-bottom:20px;">
+    <div class="row justify-content-center">
+        <div class="card" style="position:relative;width: 81.4%;border-radius: 10px;">
+            <div class="card-body row justify-content-center" style="box-shadow: 2px 2px 6px #000;padding:5px;background:#CCC">
+                {% if user.photo %}
+                <div class="col-sm-4">
+                    <div style="width: 400px;border-radius: 50%;">
+                        <img class="card-img-top" src="{{ user.photo.url }}" alt="Resim Bulunamadı" style="border-radius: 50%;">
+                    </div>
+                </div>
                 {% endif %}
-              </div>
+                <div class="col-sm-8">
+                    <h1 style="text-align:center;">Kullanıcı Profili</h1><hr>
+                    <div class="row">
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-9">
+                            <label style="font-weight:bold;margin-right:125px;">Adı: </label>
+                            <label>{{ user.name }}</label>
+                        </div>
+
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-9">
+                            <label style="font-weight:bold;margin-right:101px;">Soyadı: </label>
+                            <label>{{ user.surname }}</label>
+                        </div>
+
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-9">
+                            <label style="font-weight:bold;margin-right:114px;">Maili: </label>
+                            <label>{{ user.mail }}</label>
+                        </div>
+
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-9">
+                            <label style="font-weight:bold;margin-right:55px;">Cep Telefonu: </label>
+                            <label>{{ user.cep_tel }}</label>
+                        </div>
+
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-9">
+                            <label style="font-weight:bold;margin-right:27px;">Eğitmenlik Puanı: </label>
+                            <label>{% if user.instructor_score %}{{ user.instructor_score }}{% endif %}{% if not user.instructor_score %}Belirtilmemiş{% endif %}</label>
+                        </div>
+
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-9">
+                            <label style="font-weight:bold;margin-right:14px;">Toplam Ders Sayısı: </label>
+                            <label>{{ user.total_course_number }}</label>
+                        </div>
+
+                        <div class="col-sm-3"></div>
+                        <div class="col-sm-9">
+                            <label style="font-weight:bold;margin-right:18px;">Güncel Ders Sayısı: </label>
+                            <label>{{ user.current_course_number }}</label>
+                        </div>
+                    </div>
+                </div>
+                {% if user.experience %}
+                <div class="row mt-5">
+                    <div class="col-2" style="text-align:center"><label style="font-weight:bold;margin-right:30px;">Tecrübesi: </label></div>
+                    <div class="col-10"><label>{{ user.experience|safe }}</label></div>
+                </div>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
-
-
 {% endblock %}

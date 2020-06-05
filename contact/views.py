@@ -78,7 +78,7 @@ def contact_update(request, slug):
     if form.is_valid():
         form.save()
         messages.success(request, '"' + contact.name + '" başarıyla güncellendi.')
-        return HttpResponseRedirect(contact.get_absolute_url())
+        return redirect('user:show_profile')
 
     context = {
         'form' : form
