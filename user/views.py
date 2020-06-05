@@ -9,17 +9,17 @@ from django.db.models import Q
 # Create your views here.
 
 def user_index(request):
-    user_list = User.objects.raw('SELECT * FROM user_user WHERE user_id = ' + str(request.user.id) )
+    user_list = list(User.objects.raw('SELECT * FROM user_user WHERE user_id = ' + str(request.user.id) ))
 
     query = request.GET.get('q')
     if query:
-        user_list = User.objects.raw('SELECT DISTINCT * FROM user_user WHERE '
+        user_list = list(User.objects.raw('SELECT DISTINCT * FROM user_user WHERE '
                  '(lower(name) like \'%' + str(query).lower() + '%\') or '
                  '(lower(surname) like \'%' + str(query).lower() + '%\') or '
                  '(lower(mail) like \'%' + str(query).lower() + '%\') or '
                  '(lower(cep_tel) like \'%' + str(query).lower() + '%\') or '
                  '(lower(experience) like \'%' + str(query).lower() + '%\') or '
-                 '(lower(register_date) like \'%' + str(query).lower() + '%\')')
+                 '(lower(register_date) like \'%' + str(query).lower() + '%\')'))
 
     paginator = Paginator(user_list, 5)
 
@@ -94,7 +94,7 @@ def profile_view(request):
         return Http404()
 
 
-    user = User.objects.raw('SELECT DISTINCT * FROM user_user WHERE user_id = ' + str(request.user.id))
+    user = list(User.objects.raw('SELECT DISTINCT * FROM user_user WHERE user_id = ' + str(request.user.id)))
 
 
     if not user:

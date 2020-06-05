@@ -9,14 +9,14 @@ from django.db.models import Q
 # Create your views here.
 
 def course_index(request):
-    course_list = Course.objects.raw('SELECT * FROM course_course WHERE staff_id = ' + str(request.user.id) )
+    course_list = list(Course.objects.raw('SELECT * FROM course_course WHERE staff_id = ' + str(request.user.id) ))
     query = request.GET.get('q')
 
     if query:
-        course_list = Course.objects.raw('SELECT DISTINCT * FROM course_course WHERE '
+        course_list = list(Course.objects.raw('SELECT DISTINCT * FROM course_course WHERE '
                  '(lower(name) like \'%' + str(query).lower() + '%\') or '
                  '(lower(subject) like \'%' + str(query).lower() + '%\') or '
-                 '(lower(content) like \'%' + str(query).lower() + '%\')')
+                 '(lower(content) like \'%' + str(query).lower() + '%\')'))
 
     paginator = Paginator(course_list, 5) #Show 5 courses per page
 
